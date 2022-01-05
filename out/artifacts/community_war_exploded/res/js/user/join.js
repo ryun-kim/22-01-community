@@ -21,13 +21,13 @@
     }
 
     if(joinFrmElem){
-
-
         joinFrmElem.addEventListener('submit', (e)=>{
             const uid = joinFrmElem.uid.value;
             const upw = joinFrmElem.upw.value;
-            const upwChk =joinFrmElem.upw_chk.value;
+            const upwChk =joinFrmElem.querySelector('#upw-chk').value;
+            //const upwChk = joinFrmElem.upw-chk.value; //.점으로 자식 엘리먼트에 접근시 - 는 안된다. but _ 는 된다.
             const nm = joinFrmElem.nm.value;
+
             if(!idRegex.test(uid)){
                 alert(idmsg);
                 e.preventDefault()
@@ -70,9 +70,8 @@
             if(idVal.length < 4){
                 alert('아이디는 4자 이상 작성해 주세요.');
                 return;
-            }
-            if(!idRegex.text(idVal)){
-                alert(idmsg);
+            } else if(!idRegex.test(idVal)) {
+                alert(msg1);
                 return;
             }
             fetch(`/user/idChk/${idVal}`)

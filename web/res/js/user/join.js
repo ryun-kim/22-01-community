@@ -70,9 +70,8 @@
             if(idVal.length < 4){
                 alert('아이디는 4자 이상 작성해 주세요.');
                 return;
-            }
-            if(!idRegex.text(idVal)){
-                alert(idmsg);
+            } else if(!idRegex.test(idVal)) {
+                alert(msg1);
                 return;
             }
             fetch(`/user/idChk/${idVal}`)
