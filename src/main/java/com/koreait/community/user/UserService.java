@@ -1,6 +1,7 @@
 package com.koreait.community.user;
 
 import com.koreait.community.user.model.UserEntity;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,14 @@ public class UserService {
         UserEntity result = mapper.selUser(entity);
 
         return result == null ? 1 : 0; //아이디가 있으면 리턴 1, 없으면 리턴 0
+    }
+
+    public int join(UserEntity entity){
+        String originPw = entity.getUpw();
+        String hashPw = BCrypt.hashpw(originPw, BCrypt.gensalt());
+        entity.setUpw(hashPw);
+        int result = mapper.insUser(entity);
+        entity.setUpw(originPw);
+        return result;
     }
 }
