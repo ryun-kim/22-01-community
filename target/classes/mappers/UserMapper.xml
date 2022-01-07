@@ -10,9 +10,8 @@
     </insert>
 
     <select id="selUser" resultType="UserEntity">
-        SELECT iuser FROM t_user
+        SELECT * FROM t_user
         WHERE uid = #{uid}
     </select>
-
 
 </mapper>
