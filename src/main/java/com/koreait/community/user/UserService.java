@@ -1,14 +1,11 @@
 package com.koreait.community.user;
 
-import com.koreait.community.Const;
 import com.koreait.community.UserUtils;
-import com.koreait.community.user.model.UserEntity;
+import com.koreait.community.model.UserEntity;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
-import java.io.Console;
 
 @Service
 public class UserService {
@@ -30,12 +27,24 @@ public class UserService {
     }
 
     public int join(UserEntity entity){
+        UserEntity copyEntity = new UserEntity();
+        try{//회원가입 후 바로 로그인
+            //copyEntity = (UserEntity) BeanUtils.cloneBean(entity);
+            BeanUtils.copyProperties(entity, copyEntity);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        String hashedPw = BCrypt.hashpw(copyEntity.getUpw(),BCrypt.gensalt());
+        copyEntity.setUpw(hashedPw);
+        return mapper.insUser(copyEntity);
+        /*
         String originPw = entity.getUpw();
         String hashPw = BCrypt.hashpw(originPw, BCrypt.gensalt());
         entity.setUpw(hashPw);
         int result = mapper.insUser(entity);
         entity.setUpw(originPw);
         return result;
+         */
     }
 
     public int login(UserEntity entity){

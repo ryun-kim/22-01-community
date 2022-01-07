@@ -1,6 +1,6 @@
 package com.koreait.community;
 
-import com.koreait.community.user.model.UserEntity;
+import com.koreait.community.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

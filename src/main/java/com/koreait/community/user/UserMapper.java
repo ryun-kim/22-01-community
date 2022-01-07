@@ -1,6 +1,6 @@
 package com.koreait.community.user;
 
-import com.koreait.community.user.model.UserEntity;
+import com.koreait.community.model.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
