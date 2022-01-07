@@ -22,6 +22,7 @@ CREATE TABLE t_board(
                         ctnt TEXT NOT NULL,
                         iuser INT UNSIGNED NOT NULL,
                         hits INT UNSIGNED DEFAULT 0,
+                        isdel TINYINT UNSIGNED DEFAULT 0,
                         rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
                         mdt DATETIME DEFAULT CURRENT_TIMESTAMP
 );

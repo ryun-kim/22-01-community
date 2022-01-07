@@ -4,22 +4,20 @@ import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component("MenuPreparer")
 public class MenuPreparer implements ViewPreparer {
 
+    @Autowired
+    private CommonMapper mapper;
+
     @Override
     public void execute(Request request, AttributeContext attributeContext) {
         System.out.println(" -- Called MenuPrepaprer-excute method --");
-        List<String> menuList = new ArrayList<>();
-        menuList.add("게임");
-        menuList.add("연예인");
-        menuList.add("뉴스");
-        menuList.add("정치");
-        attributeContext.putAttribute("menuList", new Attribute(menuList), true);
+
+        attributeContext.putAttribute(Const.MENU_LIST,
+                new Attribute(mapper.selMenuCategoryList()), true);
     }
 }
