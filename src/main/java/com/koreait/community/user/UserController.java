@@ -38,7 +38,7 @@ public class UserController {
             res.addFlashAttribute("errId",entity.getUid());
             return "redirect:/user/login";
         }
-        return "redirect:/board/list"; // 로그인 성공
+        return "redirect:/board/list/1"; // 로그인 성공
     }
 
     @GetMapping("/join")

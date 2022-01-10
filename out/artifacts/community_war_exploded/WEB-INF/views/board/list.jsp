@@ -20,13 +20,13 @@
                     <th>reg date</th>
                 </tr>
             </table>
-            <c:forEach items="${requestScope.list}" var="itme">
+            <c:forEach items="${requestScope.list}" var="item">
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
+                    <td>${item.iboard}</td>
+                    <td><c:out value="${item.title}"/></td>
+                    <td>${item.hits}</td>
+                    <td>${item.writernm}</td>
+                    <td>${item.rdt}</td>
                 </tr>
             </c:forEach>
         </c:otherwise>
