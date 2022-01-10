@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -35,5 +37,21 @@ public class BoardController {
         int result = service.insBoard(entity);
 
         return "redirect:/board/list/"+ entity.getIcategory();
+    }
+
+    @GetMapping("/detail")
+    public void detail(BoardDTO dto, Model model, HttpServletRequest req){
+        String lastIp = req.getHeader("X-FORWARDED-FOR");
+        if(lastIp == null){
+            lastIp = req.getRemoteAddr();
+        }
+        dto.setLastip(lastIp);
+        model.addAttribute(Const.DATA, service.selBoardDetail(dto));
+    }
+
+    @GetMapping("/del")
+    public String delProc(BoardEntity entity){
+        int result = service.delBoard(entity);
+        return "redirect:/board/list/" + entity.getIcategory();
     }
 }

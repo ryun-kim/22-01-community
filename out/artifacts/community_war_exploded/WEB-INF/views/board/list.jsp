@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div>
-    <c:if test="${sessionScope.loginuser != null}">
+    <c:if test="${sessionScope.loginUser != null}">
         <a href="/board/write?icategory=${requestScope.icategory}">글쓰기</a>
     </c:if>
     <h1>게시글 리스트</h1>
@@ -19,9 +19,9 @@
                     <th>writer</th>
                     <th>reg date</th>
                 </tr>
-            </table>
+
             <c:forEach items="${requestScope.list}" var="item">
-                <tr>
+                <tr class="record" data-iboard="${item.iboard}">
                     <td>${item.iboard}</td>
                     <td><c:out value="${item.title}"/></td>
                     <td>${item.hits}</td>
@@ -29,6 +29,7 @@
                     <td>${item.rdt}</td>
                 </tr>
             </c:forEach>
+            </table>
         </c:otherwise>
     </c:choose>
 </div>
