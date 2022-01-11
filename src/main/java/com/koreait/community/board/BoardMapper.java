@@ -15,7 +15,7 @@ public interface BoardMapper {
 
     int insBoard(BoardEntity entity);
 
-    int addHits(BoardDTO dto);
+    int addHits(BoardEntity dto);
 
     int updBoard(BoardEntity entity);
 }
