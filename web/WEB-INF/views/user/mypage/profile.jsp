@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="profileImg" value="/res/img/defaultprofile.png"/>
-<c:if test="${sessionScope.loginUser.profileImg !=null}">
-    <c:set var="profileImg" value="/res/img/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}"/>
+<c:if test="${sessionScope.loginUser.profileimg !=null}">
+    <c:set var="profileImg" value="/res/img/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileimg}"/>
 </c:if>
 
 <h1>프로필</h1>

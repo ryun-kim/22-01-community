@@ -59,7 +59,7 @@ public class UserController {
             reAttr.addFlashAttribute(Const.MSG,Const.ERR_4);
             return  "redirect:/user/join";
         }
-        service.login(entity); //회원가입 성공 후 로그인 처리리
+        service.login(entity); //회원가입 성공 후 로그인 처리
         return "reirect:/board/list";
     }
 
@@ -77,8 +77,10 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/mypage/profile")
-    public String mypageProfileProc(MultipartFile profileimg){ //profile.js의 profileimg와 이름이 같아야함
-        
-        return "";
+    public Map<String, String> mypageProfileProc(MultipartFile profileimg){ //profile.js의 profileimg와 이름이 같아야함
+        String fileNm = service.uploadProfileImg(profileimg);
+        Map<String, String> result = new HashMap<>();
+        result.put("result", fileNm);
+        return result;
     }
 }

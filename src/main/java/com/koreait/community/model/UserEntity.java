@@ -13,7 +13,7 @@ public class UserEntity {
     private String upw;
     private String nm;
     private int gender;
-    private String profileImg;
+    private String profileimg;
     private String rdt;
     private String mdt;
 

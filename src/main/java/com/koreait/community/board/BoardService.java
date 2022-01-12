@@ -1,5 +1,6 @@
 package com.koreait.community.board;
 
+import com.koreait.community.MyFileUtils;
 import com.koreait.community.UserUtils;
 import com.koreait.community.model.BoardDTO;
 import com.koreait.community.model.BoardEntity;
@@ -13,11 +14,10 @@ import java.util.Objects;
 @Service
 public class BoardService {
 
-    @Autowired
-    public BoardMapper mapper;
+    @Autowired public BoardMapper mapper;
 
-    @Autowired
-    private UserUtils userUtils;
+    @Autowired private UserUtils userUtils;
+    @Autowired private MyFileUtils myFileUtils;
 
     public int insBoard(BoardEntity entity){
         entity.setIuser(userUtils.getLoginUserPK());
