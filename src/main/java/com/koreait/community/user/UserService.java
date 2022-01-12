@@ -71,17 +71,27 @@ public class UserService {
     //이미지 업로드 처리 및 저장 파일명 리턴
     public String uploadProfileImg(MultipartFile mf) {
         if(mf == null) { return null;}
+
+        UserEntity loginUser = userUtils.getLoginUser();
+
         final String PATH = Const.UPLOAD_IMG_PATH + "/user/" + userUtils.getLoginUserPK();
         String fileNm = fileUtils.saveFile(PATH, mf);
         System.out.println("fileNm : " + fileNm);
-
         if(fileNm == null) { return null;}
-        //파일명을 t_user 테이블에 update
+
         UserEntity entity = new UserEntity();
         entity.setIuser(userUtils.getLoginUserPK());
-        entity.setProfileimg(fileNm);
 
+        //기존 파일명
+        String oldFilePath = PATH + "/" + loginUser.getProfileimg();
+        fileUtils.delFile(oldFilePath);
+
+        //파일명을 t_user 테이블에 update
+        entity.setProfileimg(fileNm);
         mapper.updUser(entity);
+
+        //세션 프로필 파일명을 수정해준다.
+        loginUser.setProfileimg(fileNm);
 
         return fileNm;
     }
