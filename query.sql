@@ -27,3 +27,13 @@ CREATE TABLE t_board(
                         mdt DATETIME DEFAULT CURRENT_TIMESTAMP,
                         lastip varchar(15)
 );
+
+CREATE TABLE t_board_cmt(
+                            icmt INT UNSIGNED AUTO_INCREMENT,
+                            iboard INT UNSIGNED NOT NULL,
+                            iuser INT UNSIGNED NOT NULL,
+                            ctnt TEXT NOT NULL,
+                            rdt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                            mdt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                            PRIMARY KEY (icmt)
+);
