@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BoardVO extends BoardEntity{
+public class BoardVo extends BoardEntity{
     private String writernm;
     private String profileimg;
     private String categorynm;

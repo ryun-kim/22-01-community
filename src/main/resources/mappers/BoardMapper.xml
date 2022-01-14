@@ -8,7 +8,7 @@
         values (${icategory}, #{title}, #{ctnt}, #{iuser})
     </insert>
 
-    <select id="selBoardList" resultType="BoardVO">
+    <select id="selBoardList" resultType="BoardVo">
         SELECT A.iboard, A.title, A.iuser, A.hits, A.rdt
                 , B.nm AS writernm, B.profileimg
         FROM t_board A
@@ -19,7 +19,7 @@
         ORDER BY A.iboard DESC
     </select>
 
-    <select id="selBoardDetail" resultType="BoardVO">
+    <select id="selBoard" resultType="BoardVo">
         SELECT A.icategory ,A.iboard, A.title, A.ctnt, A.iuser, A.hits, A.rdt, A.lastip
         , B.nm as writernm, B.profileimg, C.nm as categorynm
         FROM t_board A
@@ -29,6 +29,25 @@
         ON A.icategory = C.icategory
         WHERE A.isdel = 0
         AND A.iboard = ${iboard}
+    </select>
+
+    <select id="selPrevNext" resultType="BoardPrevNextVo">
+        <![CDATA[
+            SELECT(
+            SELECT iboard FROM t_board
+            WHERE isdel = 0
+            AND icategory = ${icategory}
+            AND iboard > ${iboard}
+            ORDER BY iboard
+            LIMIT 1) AS previboard,
+            (
+            SELECT iboard FROM t_board
+            WHERE isdel = 0
+            AND icategory = ${icategory}
+            AND iboard < ${iboard}
+            ORDER BY iboard DESC
+            LIMIT 1) AS nextiboard
+        ]]>
     </select>
 
     <update id="addHits">

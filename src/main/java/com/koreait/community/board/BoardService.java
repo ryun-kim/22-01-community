@@ -2,9 +2,10 @@ package com.koreait.community.board;
 
 import com.koreait.community.MyFileUtils;
 import com.koreait.community.UserUtils;
-import com.koreait.community.model.BoardDTO;
+import com.koreait.community.model.BoardDto;
 import com.koreait.community.model.BoardEntity;
-import com.koreait.community.model.BoardVO;
+import com.koreait.community.model.BoardPrevNextVo;
+import com.koreait.community.model.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,12 @@ public class BoardService {
         return mapper.insBoard(entity);
     }
 
-    public List<BoardVO> selBoardList(BoardDTO dto){
+    public List<BoardVo> selBoardList(BoardDto dto){
         return mapper.selBoardList(dto);
     }
 
-    public BoardVO selBoardDetail(BoardDTO dto){
-        BoardVO detail = mapper.selBoardDetail(dto);
+    public BoardVo selBoard(BoardDto dto){
+        BoardVo detail = mapper.selBoard(dto);
         if(dto.getLastip() != null && !Objects.equals(dto.getLastip(), detail.getLastip())) {
             int hitsResult = mapper.addHits(dto);
             if(hitsResult ==1){
@@ -39,10 +40,8 @@ public class BoardService {
         return detail;
     }
 
-    public int delBoard(BoardEntity entity){ // icategory, iboard
-        entity.setIuser(userUtils.getLoginUserPK());
-        entity.setIsdel(1);
-        return mapper.updBoard(entity); // icategory, iboard, iuser, isdel
+    public BoardPrevNextVo selPrevNext(BoardVo vo) {
+        return mapper.selPrevNext(vo);
     }
 
     public int updBoard(BoardEntity entity) {
@@ -54,5 +53,13 @@ public class BoardService {
             return 2;
         }
     }
+
+    public int delBoard(BoardEntity entity){ // icategory, iboard
+        entity.setIuser(userUtils.getLoginUserPK());
+        entity.setIsdel(1);
+        return mapper.updBoard(entity); // icategory, iboard, iuser, isdel
+    }
+
+
 
 }

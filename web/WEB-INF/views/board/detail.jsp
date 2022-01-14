@@ -7,6 +7,7 @@
     </div>
 </c:if>
 <div id="data" data-icategory="${data.icategory}" data-iboard="${data.iboard}"></div>
+
 <div>
     <div>카테고리: ${data.categorynm}</div>
     <div>조회수: ${data.hits} | 등록일시: ${data.rdt}</div>
@@ -14,4 +15,12 @@
     <div>제목: <c:out value="${data.title}" /></div>
     <hr>
     <div><c:out value="${data.ctnt}" /></div>
+</div>
+<div>
+    <c:if test="${requestScope.prevNext.previboard >0}">
+        <a href="/board/detail?iboard=${requestScope.prevNext.previboard}">이전글</a>
+    </c:if>
+    <c:if test="${requestScope.prevNext.nextiboard >0}">
+        <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}">다음글</a>
+    </c:if>
 </div>
