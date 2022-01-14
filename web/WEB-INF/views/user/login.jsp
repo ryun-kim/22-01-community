@@ -4,8 +4,8 @@
 <h1>로그인</h1>
 <div>${requestScope.msg}</div>
 <form action="/user/login" method="post" id="login_frm">
-    <div><label>아이디 : <input type="text" name="uid" placeholder="${requestScope.errId}"></label></div>
-    <div><label>비밀번호 : <input type="password" name="upw"></label></div>
+    <div><label>id : <input type="text" name="uid" ></label></div>
+    <div><label>password : <input type="password" name="upw" ></label></div>
     <div>
         <input type="submit" value="로그인">
     </div>
