@@ -15,4 +15,10 @@
         WHERE A.iboard = ${iboard}
         ORDER BY A.icmt DESC
     </select>
+
+    <delete id="delBoardCmt">
+        DELETE FROM t_board_cmt
+        WHERE icmt = ${icmt}
+        AND iuser = ${iuser}
+    </delete>
 </mapper>

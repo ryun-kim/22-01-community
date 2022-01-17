@@ -7,7 +7,10 @@
             <button id="delBtn">삭제</button>
         </div>
     </c:if>
-    <div id="data" data-icategory="${data.icategory}" data-iboard="${data.iboard}"></div>
+    <div id="data"
+         data-icategory="${data.icategory}"
+         data-iboard="${data.iboard}"
+         data-iuser="${sessionScope.loginUser.iuser}"></div>
 
     <div>
         <div>카테고리: ${data.categorynm}</div>
@@ -25,9 +28,8 @@
             </form>
         </div>
     </c:if>
-    <div class="m-t-20">
-        댓글 리스트
-    </div>
+
+    <div class="m-t-20" id="cmt_list"></div>
     <div>
         <c:if test="${requestScope.prevNext.previboard >0}">
             <a href="/board/detail?iboard=${requestScope.prevNext.previboard}">이전글</a>
@@ -36,4 +38,5 @@
             <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}">다음글</a>
         </c:if>
     </div>
+
 </div>
