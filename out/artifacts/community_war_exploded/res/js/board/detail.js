@@ -37,7 +37,7 @@
                 alert('댓글 내용을 작성해 주세요.');
             } else if(regex.isWrongWith('ctnt', cmtVal)) {
                 alert(regex.msg.ctnt);
-            } else {
+            } else { //댓글 insert 시도
                 insBoardCmtAjax(cmtVal);
             }
         });
@@ -48,7 +48,17 @@
                 'ctnt': val
             };
             myFetch.post('/board/cmt', (data) => {
-                console.log(data);
+                console.log('result : ' + data.result);
+                switch(data.result){
+                    case 0:
+                        alert('댓글 등록에 실패하였습니다.');
+                        break;
+                    default:
+                        cmtFrmElem.ctnt.value = null;
+                        cmtListElem.innerHTML = null;
+                        getCmtList();
+                        break;
+                }
             }, param);
         }
     }
@@ -116,7 +126,6 @@
                         delCmt(item.icmt, tr);
                     }
                 });
-
 
                 td.appendChild(modBtn);
                 td.appendChild(delBtn);
