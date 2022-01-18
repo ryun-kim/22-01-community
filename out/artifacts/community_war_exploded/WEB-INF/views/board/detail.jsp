@@ -10,6 +10,8 @@
     <div id="data"
          data-icategory="${data.icategory}"
          data-iboard="${data.iboard}"
+         data-nm="${sessionScope.loginUser.nm}"
+         data-profileimg="${sessionScope.loginUser.profileimg}"
          data-iuser="${sessionScope.loginUser.iuser}"></div>
 
     <div>
