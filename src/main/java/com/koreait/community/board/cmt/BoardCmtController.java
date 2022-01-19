@@ -36,7 +36,7 @@ public class BoardCmtController {
         return result;
     }
 
-    @DeleteMapping("/{icmt")
+    @DeleteMapping("/{icmt}")
     public Map<String, Integer> delBoardCmt(@PathVariable int icmt){
         Map<String, Integer> result = new HashMap<>();
         result.put("result", service.delBoardCmt(icmt));
