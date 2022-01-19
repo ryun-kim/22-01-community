@@ -14,6 +14,7 @@
          data-profileimg="${sessionScope.loginUser.profileimg}"
          data-iuser="${sessionScope.loginUser.iuser}"></div>
 
+
     <div>
         <div>카테고리: ${data.categorynm}</div>
         <div>조회수: ${data.hits} | 등록일시: ${data.rdt}</div>
@@ -30,7 +31,6 @@
             </form>
         </div>
     </c:if>
-
     <div class="m-t-20" id="cmt_list"></div>
     <div>
         <c:if test="${requestScope.prevNext.previboard >0}">
@@ -39,6 +39,9 @@
         <c:if test="${requestScope.prevNext.nextiboard >0}">
             <a href="/board/detail?iboard=${requestScope.prevNext.nextiboard}">다음글</a>
         </c:if>
+        <c:if test="${sessionScope.loginUser != null }">
+            <!-- 좋아요 -->
+            <i id="fav_icon" class="far fa-thumbs-up"></i>
+        </c:if>
     </div>
-
 </div>

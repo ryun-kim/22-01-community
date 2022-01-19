@@ -223,13 +223,77 @@
             }
         });
     }
+
+    const getTrLen = () => {
+        const cmtListElem = document.querySelector('#cmt_list');
+        const trArr = cmtListElem.querySelectorAll('table tr');
+        return trArr.length;
+    }
     getCmtList();
+
+    //좋아요 기능 구현------------------------[start]--------
+    const favIconElem = document.querySelector('#fav_icon');
+
+    const isFav = () => {
+        const iboard = dataElem.dataset.iboard;
+        myFetch.get(`/board/fav/${iboard}`, (data)=>{
+            switch (data.result){
+                case 0:
+                    disableFav();
+                    break;
+                case 1:
+                    enableFav();
+                    break;
+            }
+        });
+    }
+
+    const disableFav = () => {
+        if(favIconElem){
+            favIconElem.classList.remove('fas');
+            favIconElem.classList.add('far');
+        }
+    }
+    const enableFav= () => {
+        if(favIconElem){
+            favIconElem.classList.remove('far');
+            favIconElem.classList.add('fas');
+        }
+    }
+    if(dataElem.dataset.iuser){
+        isFav();
+        favIconElem.addEventListener('click',()=>{
+            const iboard = dataElem.dataset.iboard;
+            if(favIconElem.classList.contains('far')){
+                const param={ iboard };
+                myFetch.post(`/board/fav`,(data)=>{
+                    switch (data.result){
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            enableFav();
+                            break;
+                    }
+                },param)
+            }else{
+                myFetch.delete(`/board/fav`, (data)=>{
+                    switch (data.result){
+                        case 0:
+                            alert('좋아요 처리에 실패하였습니다.');
+                            break;
+                        case 1:
+                            disableFav()
+                            break;
+                    }
+                })
+            }
+        })
+    }
+
+    //좋아요 기능 구현------------------------[end]----------
 }
 
-const getTrLen = () => {
-    const cmtListElem = document.querySelector('#cmt_list');
-    const trArr = cmtListElem.querySelectorAll('table tr');
-    return trArr.length;
-}
+
 
 // Restful API > POST, GET, PUT, DELETE
